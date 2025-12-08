@@ -6,12 +6,25 @@ import { letters } from './helpers/letters'
 function App() {
 
   const [word] = useState<string>('COMPUTADORA');
-  const [hiddenWord] = useState<string>('_ '.repeat(word.length));
+  const [hiddenWord, setHiddenWord] = useState<string>('_ '.repeat(word.length));
   const [attempts, setAttempts] = useState<number>(0);
 
   const checkLetter = (letter: string) => {
-    //Math se usa para que en pantalla, en los intentos, no aparezca un número mayor a 9 
-    setAttempts(Math.min(attempts + 1, 9));
+
+    if (!word.includes(letter)) {
+      setAttempts(Math.min(attempts + 1, 9)); //Math se usa para que en pantalla, en los intentos, no aparezca un número mayor a 9 
+      return;
+    }
+
+    const hiddenWordArray = hiddenWord.split(' ');
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] === letter) {
+        hiddenWordArray[i] = letter;
+      }
+    }
+
+    setHiddenWord(hiddenWordArray.join(' '));
+    
   }
 
   return (
