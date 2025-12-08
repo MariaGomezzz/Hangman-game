@@ -5,6 +5,8 @@ import { letters } from './helpers/letters'
 
 function App() {
 
+  const [word] = useState<string>('COMPUTADORA');
+  const [hiddenWord] = useState<string>('_ '.repeat(word.length));
   const [attempts, setAttempts] = useState<number>(0);
 
   const checkLetter = (letter: string) => {
@@ -18,7 +20,7 @@ function App() {
       <HangImage imageNumber={attempts} />
 
       {/* Palabra oculta */}
-      <h3>_ _ _ _ _</h3>
+      <h3>{hiddenWord}</h3>
 
       {/* Contador de intentos */}
       <h3> Intentos: {attempts}</h3>
